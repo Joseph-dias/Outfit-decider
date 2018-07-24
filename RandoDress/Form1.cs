@@ -10,11 +10,35 @@ using System.Windows.Forms;
 
 namespace RandoDress
 {
-    public partial class Form1 : Form
+    public partial class mainScreen : Form
     {
-        public Form1()
+        public mainScreen()
         {
             InitializeComponent();
+        }
+
+        private void hoverPlus_MouseEnter(object sender, EventArgs e)
+        {
+        }
+
+        private void hoverPlus_MouseLeave(object sender, EventArgs e)
+        {
+            if (hoverPlus.Visible) hoverPlus.Visible = false;
+        }
+
+        private void whitePlus_MouseEnter(object sender, EventArgs e)
+        {
+            if (!hoverPlus.Visible) hoverPlus.Visible = true; //Show that the user is hovering over the "button"
+        }
+
+        private void infinityPIC_MouseEnter(object sender, EventArgs e)
+        {
+            if (!infinityPICHOV.Visible) infinityPICHOV.Visible = true;
+        }
+
+        private void infinityPICHOV_MouseLeave(object sender, EventArgs e)
+        {
+            if (infinityPICHOV.Visible) infinityPICHOV.Visible = false;
         }
     }
 }
