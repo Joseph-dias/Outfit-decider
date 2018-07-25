@@ -60,6 +60,7 @@
             this.hoverPlus.TabIndex = 1;
             this.hoverPlus.TabStop = false;
             this.hoverPlus.Visible = false;
+            this.hoverPlus.Click += new System.EventHandler(this.hoverPlus_Click);
             this.hoverPlus.MouseEnter += new System.EventHandler(this.hoverPlus_MouseEnter);
             this.hoverPlus.MouseLeave += new System.EventHandler(this.hoverPlus_MouseLeave);
             // 

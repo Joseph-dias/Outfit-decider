@@ -40,5 +40,10 @@ namespace RandoDress
         {
             if (infinityPICHOV.Visible) infinityPICHOV.Visible = false;
         }
+
+        private void hoverPlus_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
