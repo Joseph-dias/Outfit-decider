@@ -43,7 +43,10 @@ namespace RandoDress
 
         private void hoverPlus_Click(object sender, EventArgs e)
         {
-
+            Forms.Adding.addShirt shirtAdded = new Forms.Adding.addShirt();
+            Hide();
+            shirtAdded.ShowDialog();
+            Close();
         }
     }
 }

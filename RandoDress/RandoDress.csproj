@@ -45,6 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code\shirts\factory.cs" />
+    <Compile Include="Code\shirts\MAKE_SHIRT.cs" />
+    <Compile Include="Code\shirts\shirt.cs" />
+    <Compile Include="Code\shirts\shirtManager.cs" />
     <Compile Include="Forms\Adding\addShirt.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +95,8 @@
     <Content Include="Program Pics\Hover Infinity Shirt.png" />
     <Content Include="Program Pics\Hover Plus.png" />
     <Content Include="Program Pics\Infinity Shirt.png" />
+    <Content Include="Program Pics\plus.ico" />
+    <Content Include="Program Pics\sample shirt.jpg" />
     <Content Include="Program Pics\White Plus.png" />
     <Content Include="shirt_wni_icon.ico" />
   </ItemGroup>
