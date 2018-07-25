@@ -89,6 +89,7 @@
             this.saveBTN.TabIndex = 4;
             this.saveBTN.Text = "Save";
             this.saveBTN.UseVisualStyleBackColor = true;
+            this.saveBTN.Click += new System.EventHandler(this.saveBTN_Click);
             // 
             // addShirt
             // 

@@ -14,6 +14,7 @@ namespace RandoDress.Code.shirts
             try
             {
                 shirt newShirt = new shirt(type, pic);
+                Code.shirts.shirtManager.getShirts.addShirt(newShirt);
                 return true;
             }
             catch(Exception)
