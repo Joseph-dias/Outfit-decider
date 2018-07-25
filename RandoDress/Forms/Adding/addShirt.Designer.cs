@@ -103,6 +103,7 @@
             this.Controls.Add(this.picBX);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "addShirt";
             this.Text = "Add";
             this.Load += new System.EventHandler(this.addShirt_Load);

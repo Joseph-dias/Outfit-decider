@@ -13,11 +13,13 @@ namespace RandoDress.Code.shirts
     class shirtManager
     {
         private static shirtManager instance = null;
+        private static Random rand = null;
         private DirectoryInfo dir;
-        List<shirt> myList;
+        private List<shirt> myList;
         private int topID;
         private shirtManager()
         {
+            if (rand == null) rand = new Random();
             topID = 0;
             myList = new List<shirt>();
             if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\myrandoshirts (DO NOT DELETE)")) Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\myrandoshirts (DO NOT DELETE)");
@@ -69,6 +71,34 @@ namespace RandoDress.Code.shirts
             newShirt.id = topID++;
             myList.Add(newShirt);
             newShirt.save(dir);
+        }
+
+        /// <summary>
+        /// Return a random selection of shirts
+        /// </summary>
+        /// <param name="num">Number of shirts to return</param>
+        /// <param name="TYPES_TO_SELECT">Types of shirts to select from</param>
+        /// <returns>Collection of random shirts</returns>
+        public async Task<shirt[]> getRandShirts(int num, List<shirtType> TYPES_TO_SELECT)
+        {
+            List<int> selectedIDs = new List<int>();
+            shirt[] toReturn = new shirt[num];
+            for(int x = 0; x < num; x++)
+            {
+                bool chosen = false;
+                do
+                {
+                    int randNum = await Task.Run(() => { return rand.Next(0, myList.Count); } );
+                    shirt selected = myList[randNum];
+                    if(!selectedIDs.Contains(selected.id) && selected.available && TYPES_TO_SELECT.Contains(selected.myType)) //If it hasn't already been selected, it's available, and it's of the correct type
+                    {
+                        selectedIDs.Add(selected.id);
+                        toReturn[x] = selected;
+                        chosen = true;
+                    }
+                } while (!chosen);
+            }
+            return toReturn;
         }
     }
 }

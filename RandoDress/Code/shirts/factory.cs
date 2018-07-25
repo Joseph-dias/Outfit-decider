@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 namespace RandoDress.Code.shirts
 {
     public enum shirtType { INFORMAL, FORMAL }
-    interface factory
+    interface IShirtFactory
     {
         bool createShirt(shirtType type, Image pic);
+        Task<shirt[]> getShirts(int num, List<shirtType> types);
     }
 }

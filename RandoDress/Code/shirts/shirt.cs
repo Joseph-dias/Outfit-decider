@@ -15,10 +15,10 @@ namespace RandoDress.Code.shirts
         /// </summary>
         public int id { get; set; }
         private Image myImage;
-        private shirtType myType;
+        public shirtType myType { get; private set; }
         private DateTime? picked; //Date that this shirt was picked
         private int? numWeeks; //Number of weeks to leave the shirt unavailable
-        private bool available;
+        public bool available { get; set; }
         public shirt(shirtType myType, Image pic)
         {
             myImage = pic;

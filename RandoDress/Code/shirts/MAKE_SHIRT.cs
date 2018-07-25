@@ -7,20 +7,25 @@ using System.Threading.Tasks;
 
 namespace RandoDress.Code.shirts
 {
-    public class MAKE_SHIRT : factory
+    public class MAKE_SHIRT : IShirtFactory
     {
         public bool createShirt(shirtType type, Image pic)
         {
             try
             {
                 shirt newShirt = new shirt(type, pic);
-                Code.shirts.shirtManager.getShirts.addShirt(newShirt);
+                shirtManager.getShirts.addShirt(newShirt);
                 return true;
             }
             catch(Exception)
             {
                 return false;
             }
+        }
+
+        public async Task<shirt[]> getShirts(int num, List<shirtType> types)
+        {
+            return await shirtManager.getShirts.getRandShirts(num, types);
         }
     }
 }

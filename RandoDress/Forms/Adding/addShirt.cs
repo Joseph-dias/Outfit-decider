@@ -13,7 +13,7 @@ namespace RandoDress.Forms.Adding
     public partial class addShirt : Form
     {
         private static bool picAdded;
-        private Code.shirts.factory makeShirt;
+        private Code.shirts.IShirtFactory makeShirt;
         private int checkedIndex;
         public addShirt()
         {

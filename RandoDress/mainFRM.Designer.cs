@@ -74,6 +74,7 @@
             this.infinityPICHOV.TabIndex = 2;
             this.infinityPICHOV.TabStop = false;
             this.infinityPICHOV.Visible = false;
+            this.infinityPICHOV.Click += new System.EventHandler(this.infinityPICHOV_Click);
             this.infinityPICHOV.MouseLeave += new System.EventHandler(this.infinityPICHOV_MouseLeave);
             // 
             // infinityPIC
@@ -101,6 +102,7 @@
             this.Controls.Add(this.infinityPIC);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "mainScreen";
             this.Text = "Home";
             ((System.ComponentModel.ISupportInitialize)(this.whitePlus)).EndInit();

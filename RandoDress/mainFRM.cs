@@ -46,7 +46,16 @@ namespace RandoDress
             Forms.Adding.addShirt shirtAdded = new Forms.Adding.addShirt();
             Hide();
             shirtAdded.ShowDialog();
-            Close();
+            Show();
+        }
+
+        private void infinityPICHOV_Click(object sender, EventArgs e)
+        {
+            Forms.Random.randSettings settings = new Forms.Random.randSettings();
+            Hide();
+            DialogResult result = settings.ShowDialog();
+            if (result == DialogResult.Cancel) Show();
+            else Close();
         }
     }
 }
