@@ -50,6 +50,7 @@
     <Compile Include="Code\shirts\shirt.cs" />
     <Compile Include="Code\shirts\shirtManager.cs" />
     <Compile Include="Code\Static_Data\settings.cs" />
+    <Compile Include="Code\Static_Data\shirtData.cs" />
     <Compile Include="Forms\Adding\addShirt.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +69,12 @@
     <Compile Include="Forms\Random\randShirts.Designer.cs">
       <DependentUpon>randShirts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Random\shirtINFO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Random\shirtINFO.Designer.cs">
+      <DependentUpon>shirtINFO.cs</DependentUpon>
+    </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="mainFRM.cs">
       <SubType>Form</SubType>
@@ -85,6 +92,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Random\randShirts.resx">
       <DependentUpon>randShirts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Random\shirtINFO.resx">
+      <DependentUpon>shirtINFO.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="mainFRM.resx">
       <DependentUpon>mainFRM.cs</DependentUpon>

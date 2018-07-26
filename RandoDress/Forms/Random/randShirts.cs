@@ -13,6 +13,7 @@ namespace RandoDress.Forms.Random
     public partial class randShirts : Form
     {
         private Code.shirts.IShirtFactory factory;
+        private Code.shirts.shirt[] returned;
         public randShirts()
         {
             InitializeComponent();
@@ -23,7 +24,7 @@ namespace RandoDress.Forms.Random
             factory = new Code.shirts.MAKE_SHIRT();
             try
             {
-                Code.shirts.shirt[] returned = factory.getShirts(Code.Static_Data.settings.numShirts, Code.Static_Data.settings.types);
+                returned = factory.getShirts(Code.Static_Data.settings.numShirts, Code.Static_Data.settings.types);
                 if (returned.Count() == 0) warningLBL.Visible = true;
                 foreach (Code.shirts.shirt s in returned)
                 {
@@ -39,6 +40,18 @@ namespace RandoDress.Forms.Random
             {
                 warningLBL.Visible = true;
             }
+        }
+
+        private void listView1_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 1)
+            {
+                Code.shirts.shirt myShirt = returned[listView1.SelectedItems[0].ImageIndex];
+                Code.Static_Data.shirtData.selectedShirt = myShirt;
+                shirtINFO selected = new shirtINFO();
+                selected.ShowDialog();
+            }
+            else MessageBox.Show("SELECT ONE ITEM", "INFO", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
