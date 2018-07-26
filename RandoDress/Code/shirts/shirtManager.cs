@@ -59,6 +59,7 @@ namespace RandoDress.Code.shirts
             get
             {
                 if (instance == null) instance = new shirtManager();
+                else instance.checkAllShirts();
                 return instance;
             }
         }
@@ -102,6 +103,24 @@ namespace RandoDress.Code.shirts
                 } while (!chosen);
             }
             return toReturn;
+        }
+
+        public shirt[] getAllShirts(List<shirtType> TYPES_TO_RETURN)
+        {
+            List<shirt> toReturn = new List<shirt>();
+            foreach(shirt s in myList)
+            {
+                if (TYPES_TO_RETURN.Contains(s.myType)) toReturn.Add(s);
+            }
+            return toReturn.ToArray();
+        }
+
+        private void checkAllShirts()
+        {
+            foreach(shirt uShirt in myList.FindAll((shirt myShirt) => { return myShirt.available == false; }))
+            {
+                uShirt.checkShirt();
+            }
         }
     }
 }

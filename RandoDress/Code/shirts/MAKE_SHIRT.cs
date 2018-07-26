@@ -23,6 +23,11 @@ namespace RandoDress.Code.shirts
             }
         }
 
+        public shirt[] getAllShirts(List<shirtType> types)
+        {
+            return shirtManager.getShirts.getAllShirts(types);
+        }
+
         public shirt[] getShirts(int num, List<shirtType> types)
         {
             return shirtManager.getShirts.getRandShirts(num, types);

@@ -12,5 +12,6 @@ namespace RandoDress.Code.shirts
     {
         bool createShirt(shirtType type, Image pic);
         shirt[] getShirts(int num, List<shirtType> types);
+        shirt[] getAllShirts(List<shirtType> types);
     }
 }

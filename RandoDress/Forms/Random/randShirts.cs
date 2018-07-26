@@ -24,7 +24,8 @@ namespace RandoDress.Forms.Random
             factory = new Code.shirts.MAKE_SHIRT();
             try
             {
-                returned = factory.getShirts(Code.Static_Data.settings.numShirts, Code.Static_Data.settings.types);
+                if (Code.Static_Data.settings.numShirts > 0) returned = factory.getShirts(Code.Static_Data.settings.numShirts, Code.Static_Data.settings.types);
+                else returned = factory.getAllShirts(Code.Static_Data.settings.types); //Get all shirts
                 if (returned.Count() == 0) warningLBL.Visible = true;
                 foreach (Code.shirts.shirt s in returned)
                 {

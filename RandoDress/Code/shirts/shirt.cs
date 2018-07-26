@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RandoDress.Code.shirts
 {
-    public class shirt
+    public class shirt : Clothing
     {
         /// <summary>
         /// This shirt's id #
@@ -18,7 +18,7 @@ namespace RandoDress.Code.shirts
         public shirtType myType { get; private set; }
         private DateTime? picked; //Date that this shirt was picked
         private int? numWeeks; //Number of weeks to leave the shirt unavailable
-        public bool available { get; set; }
+        public bool available { get; private set; }
         public shirt(shirtType myType, Image pic)
         {
             myImage = pic;
@@ -26,6 +26,40 @@ namespace RandoDress.Code.shirts
             picked = null;
             numWeeks = null;
             available = true; //This shirt is available
+        }
+
+        /// <summary>
+        /// Use the shirt
+        /// </summary>
+        /// <param name="num">Deactivate for given number of weeks</param>
+        public void useShirt(int num)
+        {
+            available = false;
+            numWeeks = num;
+            picked = DateTime.Now;
+            save(myDir);
+        }
+
+        /// <summary>
+        /// Check the shirt (if it's unavailable) and reset it if it has passed it's allotted weeks.
+        /// </summary>
+        public void checkShirt()
+        {
+            if(picked != null && numWeeks != null)
+            {
+                int num = numWeeks.Value;
+                DateTime toCheck = picked.Value;
+                DateTime expire = toCheck.AddDays(num * 7);
+                if (toCheck > expire) resetShirt();
+            }
+        }
+
+        public void resetShirt()
+        {
+            available = true;
+            numWeeks = null;
+            picked = null;
+            save(myDir);
         }
 
         /// <summary>
@@ -44,6 +78,7 @@ namespace RandoDress.Code.shirts
             string[] values = txt.Split(';');
             setValues(values);
             myImage = Image.FromFile(dir.FullName + "\\pic.jpg");
+            myDir = dir.Parent;
         }
 
         /// <summary>
@@ -64,11 +99,7 @@ namespace RandoDress.Code.shirts
             available = bool.Parse(s[4]);
         }
 
-        /// <summary>
-        /// Save the shirt
-        /// </summary>
-        /// <param name="dir">Current top directory for the program</param>
-        public void save(DirectoryInfo dir)
+        public override void save(DirectoryInfo dir)
         {
             DirectoryInfo newDir;
             if (!Directory.Exists(dir.FullName + "\\" + id + "shirt")) newDir = dir.CreateSubdirectory(id + "shirt");
@@ -80,6 +111,7 @@ namespace RandoDress.Code.shirts
             s.Close(); //Close the stream
             //Save image
             myImage.Save(newDir.FullName + "\\pic.jpg");
+            myDir = dir;
         }
     }
 }

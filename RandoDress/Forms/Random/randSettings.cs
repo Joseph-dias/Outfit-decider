@@ -30,14 +30,14 @@ namespace RandoDress.Forms.Random
 
         private void goBTN_Click(object sender, EventArgs e)
         {
-            if(validate())
+            if (validate())
             {
                 Code.Static_Data.settings.numShirts = Convert.ToInt32(numOUT.Value);
                 Code.Static_Data.settings.types = new List<Code.shirts.shirtType>();
-                foreach(Control c in checkPNL.Controls)
+                foreach (Control c in checkPNL.Controls)
                 {
                     CheckBox b = c as CheckBox;
-                    if(b.Checked)
+                    if (b.Checked)
                     {
                         Code.Static_Data.settings.types.Add((Code.shirts.shirtType)Enum.Parse(typeof(Code.shirts.shirtType), b.Text));
                     }
@@ -48,6 +48,7 @@ namespace RandoDress.Forms.Random
                 shirtForm.ShowDialog();
                 Close();
             }
+            else MessageBox.Show("Invalid", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         /// <summary>
@@ -65,8 +66,18 @@ namespace RandoDress.Forms.Random
                     break;
                 }
             }
-            if (Convert.ToInt32(numOUT.Value) > 0 && oneChecked) return true;
+            if ((Convert.ToInt32(numOUT.Value) > 0 || checkBox1.Checked) && oneChecked) return true;
             else return false;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked) numOUT.Value = 0;
+        }
+
+        private void numOUT_ValueChanged(object sender, EventArgs e)
+        {
+            if (numOUT.Value > 0) checkBox1.Checked = false;
         }
     }
 }

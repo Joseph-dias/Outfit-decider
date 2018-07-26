@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code\Clothing.cs" />
     <Compile Include="Code\shirts\factory.cs" />
     <Compile Include="Code\shirts\MAKE_SHIRT.cs" />
     <Compile Include="Code\shirts\shirt.cs" />
