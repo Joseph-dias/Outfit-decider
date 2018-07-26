@@ -11,6 +11,6 @@ namespace RandoDress.Code.shirts
     interface IShirtFactory
     {
         bool createShirt(shirtType type, Image pic);
-        Task<shirt[]> getShirts(int num, List<shirtType> types);
+        shirt[] getShirts(int num, List<shirtType> types);
     }
 }

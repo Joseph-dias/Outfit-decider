@@ -83,6 +83,9 @@
     <EmbeddedResource Include="Forms\Random\randSettings.resx">
       <DependentUpon>randSettings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Random\randShirts.resx">
+      <DependentUpon>randShirts.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="mainFRM.resx">
       <DependentUpon>mainFRM.cs</DependentUpon>
     </EmbeddedResource>

@@ -14,7 +14,7 @@ namespace RandoDress.Code.shirts
         /// This shirt's id #
         /// </summary>
         public int id { get; set; }
-        private Image myImage;
+        public Image myImage { get; private set; }
         public shirtType myType { get; private set; }
         private DateTime? picked; //Date that this shirt was picked
         private int? numWeeks; //Number of weeks to leave the shirt unavailable

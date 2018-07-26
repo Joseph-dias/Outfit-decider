@@ -79,8 +79,10 @@ namespace RandoDress.Code.shirts
         /// <param name="num">Number of shirts to return</param>
         /// <param name="TYPES_TO_SELECT">Types of shirts to select from</param>
         /// <returns>Collection of random shirts</returns>
-        public async Task<shirt[]> getRandShirts(int num, List<shirtType> TYPES_TO_SELECT)
+        public shirt[] getRandShirts(int num, List<shirtType> TYPES_TO_SELECT)
         {
+            if (myList.Count == 0) throw new Exception("INVALID NUMBER OF ELEMENTS");
+            else if (num > myList.Count) num = myList.Count;
             List<int> selectedIDs = new List<int>();
             shirt[] toReturn = new shirt[num];
             for(int x = 0; x < num; x++)
@@ -88,7 +90,7 @@ namespace RandoDress.Code.shirts
                 bool chosen = false;
                 do
                 {
-                    int randNum = await Task.Run(() => { return rand.Next(0, myList.Count); } );
+                    int randNum = rand.Next(0, myList.Count);
                     shirt selected = myList[randNum];
                     if(!selectedIDs.Contains(selected.id) && selected.available && TYPES_TO_SELECT.Contains(selected.myType)) //If it hasn't already been selected, it's available, and it's of the correct type
                     {

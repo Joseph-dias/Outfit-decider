@@ -23,9 +23,9 @@ namespace RandoDress.Code.shirts
             }
         }
 
-        public async Task<shirt[]> getShirts(int num, List<shirtType> types)
+        public shirt[] getShirts(int num, List<shirtType> types)
         {
-            return await shirtManager.getShirts.getRandShirts(num, types);
+            return shirtManager.getShirts.getRandShirts(num, types);
         }
     }
 }

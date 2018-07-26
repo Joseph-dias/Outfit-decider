@@ -43,7 +43,10 @@ namespace RandoDress.Forms.Random
                     }
                 }
                 //Show next form
-
+                randShirts shirtForm = new randShirts();
+                Hide();
+                shirtForm.ShowDialog();
+                Close();
             }
         }
 
