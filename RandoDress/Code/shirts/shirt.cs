@@ -16,6 +16,7 @@ namespace RandoDress.Code.shirts
         public int id { get; set; }
         public Image myImage { get; private set; }
         public shirtType myType { get; private set; }
+        private bool del;
         private DateTime? picked; //Date that this shirt was picked
         private int? numWeeks; //Number of weeks to leave the shirt unavailable
         public bool available { get; private set; }
@@ -26,40 +27,58 @@ namespace RandoDress.Code.shirts
             picked = null;
             numWeeks = null;
             available = true; //This shirt is available
+            del = false; //Don't delete
         }
 
         /// <summary>
         /// Use the shirt
         /// </summary>
         /// <param name="num">Deactivate for given number of weeks</param>
-        public void useShirt(int num)
+        public void useShirt(int num, bool del = false)
         {
             available = false;
             numWeeks = num;
             picked = DateTime.Now;
+            this.del = del;
             save(myDir);
         }
 
         /// <summary>
         /// Check the shirt (if it's unavailable) and reset it if it has passed it's allotted weeks.
         /// </summary>
-        public void checkShirt()
+        /// <returns>Good shirt or not</returns>
+        public bool checkShirt()
         {
             if(picked != null && numWeeks != null)
             {
                 int num = numWeeks.Value;
                 DateTime toCheck = picked.Value;
                 DateTime expire = toCheck.AddDays(num * 7);
-                if (toCheck > expire) resetShirt();
+                if (toCheck > expire) return resetShirt();
+            }
+            return true;
+        }
+
+        public void abortDelete()
+        {
+            if (del)
+            {
+                del = false;
+                save(myDir);
             }
         }
 
-        public void resetShirt()
+        /// <summary>
+        /// Reset shirt back to available
+        /// </summary>
+        /// <returns>Whether or not to use the shirt again.</returns>
+        public bool resetShirt()
         {
             available = true;
             numWeeks = null;
             picked = null;
             save(myDir);
+            return !del;
         }
 
         /// <summary>
@@ -97,6 +116,7 @@ namespace RandoDress.Code.shirts
             if (s[3] == "NULL") numWeeks = null;
             else numWeeks = Convert.ToInt32(s[3]);
             available = bool.Parse(s[4]);
+            del = bool.Parse(s[5]);
         }
 
         public override void save(DirectoryInfo dir)
@@ -106,12 +126,36 @@ namespace RandoDress.Code.shirts
             else newDir = new DirectoryInfo(dir.FullName + "\\" + id + "shirt");
             //Save text values
             FileStream s = File.Create(newDir.FullName + "\\info.txt");
-            byte[] buffer = ASCIIEncoding.ASCII.GetBytes((id + ";" + Convert.ToInt32(myType) + ";" + (picked == null ? "NULL" : picked.Value.Month + "/" + picked.Value.Day + "/" + picked.Value.Year) + ";" + (numWeeks == null ? "NULL" : numWeeks.Value.ToString()) + ";" + available.ToString()).ToCharArray());
+            byte[] buffer = ASCIIEncoding.ASCII.GetBytes((id + ";" + Convert.ToInt32(myType) + ";" + (picked == null ? "NULL" : picked.Value.Month + "/" + picked.Value.Day + "/" + picked.Value.Year) + ";" + (numWeeks == null ? "NULL" : numWeeks.Value.ToString()) + ";" + available.ToString() + ";" + del.ToString()).ToCharArray());
             s.Write(buffer, 0, buffer.Count());
             s.Close(); //Close the stream
             //Save image
-            myImage.Save(newDir.FullName + "\\pic.jpg");
+            if(!File.Exists(newDir.FullName + "\\pic.jpg")) myImage.Save(newDir.FullName + "\\pic.jpg");
             myDir = dir;
+        }
+
+        public override bool destroy()
+        {
+            try
+            {
+                if (myDir != null)
+                {
+                    DirectoryInfo thisDir = new DirectoryInfo(myDir.FullName + "\\" + id + "shirt");
+                    foreach (FileInfo f in thisDir.GetFiles())
+                    {
+                        f.Delete();
+                    }
+                    thisDir.Delete();
+                }
+                return true;
+            }catch(IOException)
+            {
+                del = true;
+                numWeeks = 0;
+                picked = DateTime.Now.AddDays(-1);
+                save(myDir);
+            }
+            return false;
         }
     }
 }

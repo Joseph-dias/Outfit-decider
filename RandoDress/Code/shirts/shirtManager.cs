@@ -115,11 +115,33 @@ namespace RandoDress.Code.shirts
             return toReturn.ToArray();
         }
 
+        public void deleteShirt(shirt s)
+        {
+            bool success = s.destroy();
+            if (success)
+            {
+                shirt toRemove = null;
+                foreach (shirt t in myList)
+                {
+                    if (s.id == t.id) toRemove = t;
+                }
+                if (toRemove != null) myList.Remove(toRemove);
+            }
+        }
+
         private void checkAllShirts()
         {
+            List<shirt> delList = new List<shirt>();
             foreach(shirt uShirt in myList.FindAll((shirt myShirt) => { return myShirt.available == false; }))
             {
-                uShirt.checkShirt();
+                if (!uShirt.checkShirt()) delList.Add(uShirt);
+            }
+            foreach(shirt noGood in delList)
+            {
+                if (noGood.destroy())
+                {
+                    myList.Remove(noGood);
+                }
             }
         }
     }

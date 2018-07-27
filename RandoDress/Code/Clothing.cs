@@ -19,5 +19,6 @@ namespace RandoDress.Code
         /// </summary>
         /// <param name="dir">Current top directory for the program</param>
         public abstract void save(DirectoryInfo dir);
+        public abstract bool destroy();
     }
 }

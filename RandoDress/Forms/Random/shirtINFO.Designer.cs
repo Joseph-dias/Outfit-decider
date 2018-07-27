@@ -39,6 +39,7 @@
             this.weekNUM = new System.Windows.Forms.NumericUpDown();
             this.weeksLBL = new System.Windows.Forms.Label();
             this.weeksPNL = new System.Windows.Forms.Panel();
+            this.delBX = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.weekNUM)).BeginInit();
             this.weeksPNL.SuspendLayout();
@@ -112,6 +113,7 @@
             this.mAvailableBTN.TabIndex = 5;
             this.mAvailableBTN.Text = "MAKE AVAILABLE";
             this.mAvailableBTN.UseVisualStyleBackColor = false;
+            this.mAvailableBTN.Click += new System.EventHandler(this.mAvailableBTN_Click);
             // 
             // button1
             // 
@@ -153,6 +155,7 @@
             // weeksPNL
             // 
             this.weeksPNL.BackColor = System.Drawing.SystemColors.GrayText;
+            this.weeksPNL.Controls.Add(this.delBX);
             this.weeksPNL.Controls.Add(this.weeksLBL);
             this.weeksPNL.Controls.Add(this.button2);
             this.weeksPNL.Controls.Add(this.weekNUM);
@@ -162,6 +165,17 @@
             this.weeksPNL.Size = new System.Drawing.Size(266, 135);
             this.weeksPNL.TabIndex = 10;
             this.weeksPNL.Visible = false;
+            // 
+            // delBX
+            // 
+            this.delBX.AutoSize = true;
+            this.delBX.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.delBX.Location = new System.Drawing.Point(113, 13);
+            this.delBX.Name = "delBX";
+            this.delBX.Size = new System.Drawing.Size(139, 21);
+            this.delBX.TabIndex = 10;
+            this.delBX.Text = "Delete after use?";
+            this.delBX.UseVisualStyleBackColor = true;
             // 
             // shirtINFO
             // 
@@ -203,5 +217,6 @@
         private System.Windows.Forms.NumericUpDown weekNUM;
         private System.Windows.Forms.Label weeksLBL;
         private System.Windows.Forms.Panel weeksPNL;
+        private System.Windows.Forms.CheckBox delBX;
     }
 }

@@ -32,13 +32,13 @@ namespace RandoDress.Forms.Random
         /// </summary>
         private void availabilityUI()
         {
-            if(thisShirt.available)
+            if(thisShirt.available) //The shirt is available
             {
                 if (!availableTXT.Visible) availableTXT.Visible = true;
                 if (usedTXT.Visible) usedTXT.Visible = false;
                 if (mAvailableBTN.Visible) mAvailableBTN.Visible = false;
                 if (!usedBTN.Visible) usedBTN.Visible = true;
-            }else
+            }else //The shirt is not available
             {
                 if (availableTXT.Visible) availableTXT.Visible = false;
                 if (!usedTXT.Visible) usedTXT.Visible = true;
@@ -55,7 +55,11 @@ namespace RandoDress.Forms.Random
             Point bottomRight = new Point(topLeft.X + Width, topLeft.Y + Height);
             if (topLeft.X < mousePos.X && bottomRight.X > mousePos.X) xBound = true;
             if (topLeft.Y < mousePos.Y && bottomRight.Y > mousePos.Y) yBound = true;
-            if(!(xBound && yBound)) Close();
+            if (!(xBound && yBound))
+            {
+                DialogResult = DialogResult.Ignore;
+                Close();
+            }
         }
 
         private void usedBTN_Click(object sender, EventArgs e)
@@ -75,11 +79,27 @@ namespace RandoDress.Forms.Random
         {
             if(Convert.ToInt32(weekNUM.Value) > 0)
             {
-                thisShirt.useShirt(Convert.ToInt32(weekNUM.Value));
+                thisShirt.useShirt(Convert.ToInt32(weekNUM.Value), delBX.Checked);
                 weekNUM.Value = 0;
                 weeksPNL.Visible = false;
                 availabilityUI();
             }
+        }
+
+        private void mAvailableBTN_Click(object sender, EventArgs e)
+        {
+            if(!thisShirt.resetShirt())
+            {
+                DialogResult result = MessageBox.Show("This shirt is scheduled to be deleted.\nAre you sure?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button2);
+                if (result == DialogResult.Yes)
+                {
+                    Code.shirts.shirtManager.getShirts.deleteShirt(thisShirt);
+                    DialogResult = DialogResult.Abort;
+                    Close();
+                }
+                else thisShirt.abortDelete();
+            }
+            availabilityUI();
         }
     }
 }

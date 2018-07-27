@@ -13,8 +13,7 @@ namespace RandoDress.Forms.Adding
     public partial class addShirt : Form
     {
         private static bool picAdded;
-        private Code.shirts.IShirtFactory makeShirt;
-        private int checkedIndex;
+        private static Code.shirts.IShirtFactory makeShirt;
         public addShirt()
         {
             InitializeComponent();
@@ -43,7 +42,6 @@ namespace RandoDress.Forms.Adding
         private void addShirt_Load(object sender, EventArgs e)
         {
             int x = 0;
-            checkedIndex = 0;
             foreach(Enum val in Enum.GetValues(typeof(Code.shirts.shirtType)))
             {
                 checkBX.Items.Add(val.ToString(), x == 0);
@@ -53,7 +51,6 @@ namespace RandoDress.Forms.Adding
 
         private void checkBX_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            checkedIndex = e.Index;
             for(int x = 0; x < checkBX.Items.Count; x++)
             {
                 if (x != e.Index) checkBX.SetItemChecked(x, false);
@@ -70,7 +67,7 @@ namespace RandoDress.Forms.Adding
         {
             if(validate())
             {
-                if (makeShirt.createShirt((Code.shirts.shirtType)checkedIndex, picBX.Image))
+                if (makeShirt.createShirt((Code.shirts.shirtType)checkBX.CheckedIndices[0], picBX.Image))
                 {
                     MessageBox.Show("SAVED", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();

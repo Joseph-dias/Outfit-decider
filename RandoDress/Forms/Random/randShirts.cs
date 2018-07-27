@@ -43,6 +43,7 @@ namespace RandoDress.Forms.Random
             }
         }
 
+        //Single click on an item
         private void listView1_Click(object sender, EventArgs e)
         {
             if (listView1.SelectedItems.Count == 1)
@@ -50,7 +51,8 @@ namespace RandoDress.Forms.Random
                 Code.shirts.shirt myShirt = returned[listView1.SelectedItems[0].ImageIndex];
                 Code.Static_Data.shirtData.selectedShirt = myShirt;
                 shirtINFO selected = new shirtINFO();
-                selected.ShowDialog();
+                DialogResult result = selected.ShowDialog();
+                if (result == DialogResult.Abort) Close();
             }
             else MessageBox.Show("SELECT ONE ITEM", "INFO", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
