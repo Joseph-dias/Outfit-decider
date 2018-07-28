@@ -42,7 +42,7 @@
             this.picBX.Image = ((System.Drawing.Image)(resources.GetObject("picBX.Image")));
             this.picBX.Location = new System.Drawing.Point(12, 12);
             this.picBX.Name = "picBX";
-            this.picBX.Size = new System.Drawing.Size(402, 426);
+            this.picBX.Size = new System.Drawing.Size(387, 414);
             this.picBX.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picBX.TabIndex = 0;
             this.picBX.TabStop = false;

@@ -84,7 +84,7 @@ namespace RandoDress.Code.shirts
         public shirt[] getRandShirts(int num, List<shirtType> TYPES_TO_SELECT)
         {
             if (myList.Count == 0) throw new Exception("INVALID NUMBER OF ELEMENTS");
-            else if (num > myList.Count) num = myList.Count;
+            else if (num > myList.FindAll((shirt theShirt) => { return theShirt.available; }).Count) num = myList.FindAll((shirt theShirt) => { return theShirt.available; }).Count;
             List<int> selectedIDs = new List<int>();
             shirt[] toReturn = new shirt[num];
             for(int x = 0; x < num; x++)
